@@ -93,7 +93,7 @@ const Nav = () => {
           </div>
         </nav>
         {isMobileMenuOpen && (
-          <div className="md:hidden flex flex-col  items-center z-10 h-screen w-full gap-2 p-5 border-t border-slate-700 absolute top-20 left-0">
+          <div className="md:hidden flex flex-col bg-white items-center z-10 h-screen w-full gap-2 p-5 border-t border-slate-700 absolute top-20 left-0">
             <ul className="flex flex-col  w-full items-center gap-2 text-gray-900 font-rubik rounded-xl px-2 text-sm">
               <Link
                 to="/"
