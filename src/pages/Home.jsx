@@ -70,7 +70,7 @@ const HeroSection = () => {
               </p>
             </div>
             <div className="w-full max-w-7xl mx-auto flex flex-col justify-center items-center">
-            <div className='grid grid-cols-2 gap-5 mx-auto w-full'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto w-full'>
                 {Explore.map((cate, index) => (
                     <div key={index} className="relative grid grid-cols-3 bg-gray-200 gap-5 rounded-md shadow-md overflow-hidden p-6">
                         <div className={`absolute -top-20 -left-5 w-32 h-32 ${background[index % background.length]} rotate-45 z-10`}></div>
