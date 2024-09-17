@@ -84,23 +84,23 @@ const Nav = () => {
           <div className="flex md:hidden items-center gap-4">
             <button onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? (
-                <FiX className="text-3xl text-white hover:text-red-500 duration-500" />
+                <FiX className="text-3xl text-gray-900 hover:text-red-500 duration-500" />
               ) : (
-                <FiMenu className="text-white text-3xl" />
+                <FiMenu className="text-gray-900 text-3xl" />
               )}
             </button>
             {currentUser && <NavProfile />}
           </div>
         </nav>
         {isMobileMenuOpen && (
-          <div className="md:hidden flex flex-col  items-center z-10 h-screen w-full bg-[#06131a] gap-2 p-5 border-t border-slate-700 absolute top-20 left-0">
+          <div className="md:hidden flex flex-col  items-center z-10 h-screen w-full gap-2 p-5 border-t border-slate-700 absolute top-20 left-0">
             <ul className="flex flex-col  w-full items-center gap-2 text-gray-900 font-rubik rounded-xl px-2 text-sm">
               <Link
                 to="/"
                 className="w-full flex text-center justify-center items-center"
                 onClick={toggleMobileMenu}
               >
-                <li className="w-full  flex justify-center items-center gap-2 cursor-pointer hover:text-[#06131a] hover:bg-white p-2 rounded-lg duration-500 list-none border border-slate-700">
+                <li className="w-full  flex justify-center items-center gap-2 cursor-pointer p-2 rounded-lg duration-500 list-none border border-slate-700">
                   <IoHome />
                   Home
                 </li>
@@ -110,7 +110,7 @@ const Nav = () => {
                 className="w-full flex text-center justify-center items-center"
                 onClick={toggleMobileMenu}
               >
-                <li className="cursor-pointer flex justify-center items-center gap-2 hover:text-[#06131a] hover:bg-white p-2 rounded-lg duration-500 list-none border border-slate-700 w-full">
+                <li className="cursor-pointer flex justify-center items-center gap-2  p-2 rounded-lg duration-500 list-none border border-slate-700 w-full">
                   <RiQuestionAnswerFill />
                   Question
                 </li>
@@ -120,7 +120,7 @@ const Nav = () => {
                 className="w-full flex text-center justify-center items-center"
                 onClick={toggleMobileMenu}
               >
-                <li className="cursor-pointer flex justify-center items-center gap-2 hover:text-[#06131a] hover:bg-white p-2 rounded-lg duration-500 list-none border border-slate-700 w-full">
+                <li className="cursor-pointer flex justify-center items-center gap-2  p-2 rounded-lg duration-500 list-none border border-slate-700 w-full">
                   <FaRegBookmark />
                   Your Posts
                 </li>
@@ -131,7 +131,7 @@ const Nav = () => {
                   className="w-full flex text-center justify-center items-center"
                   onClick={toggleMobileMenu}
                 >
-                  <li className="cursor-pointer flex justify-center items-center gap-2 hover:text-[#06131a] hover:bg-white p-2 rounded-lg duration-500 list-none border border-slate-700 w-full">
+                  <li className="cursor-pointer flex justify-center items-center gap-2  p-2 rounded-lg duration-500 list-none border border-slate-700 w-full">
                     <RxDashboard />
                     Dashboard
                   </li>
@@ -143,7 +143,7 @@ const Nav = () => {
                 <>
                   <Link
                     to="/login"
-                    className="w-full text-white hover:bg-green-500 flex text-center justify-center items-center"
+                    className="w-full text-gray-900 hover:bg-green-500 flex text-center justify-center items-center"
                     onClick={toggleMobileMenu}
                   >
                     <button className="w-full border border-slate-700 p-2 text-sm rounded-md">
@@ -152,7 +152,7 @@ const Nav = () => {
                   </Link>
                   <Link
                     to="/signup"
-                    className="w-full flex text-white hover:bg-blue-500 text-center justify-center items-center"
+                    className="w-full flex text-gray-900 hover:bg-blue-500 text-center justify-center items-center"
                     onClick={toggleMobileMenu}
                   >
                     <button className="w-full border border-slate-700 p-2 text-sm rounded-md">
