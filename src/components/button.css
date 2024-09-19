@@ -1,44 +1,44 @@
 .btn{
     border: none;
-    border: 2px solid white;
-    padding: 10px;
-    color: white;
-    position: relative;
-    cursor: pointer;
+    border: 2px solid white; /* Adds a solid white border around the button */
+    padding: 10px; 
+    color: white; 
+    position: relative; /* Required to position the pseudo-elements */
+    cursor: pointer; 
 }
 
 .btn:not(:hover):before{
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #fff;
-    width: 0;
-    height: 100%;
-    overflow: hidden;
-    transition: .5s cubic-bezier(0.39, 0.575, 0.565, 1);
-    z-index: -1;
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    background-color: #fff; 
+    width: 0; /* Starts with no width (hidden) */
+    height: 100%; 
+    overflow: hidden; 
+    transition: .5s cubic-bezier(0.39, 0.575, 0.565, 1); /* Controls the animation speed and effect */
+    z-index: -1; /* Ensures this pseudo-element is behind the text */
 }
 
 .btn:hover::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    width: 100%;
-    height: 100%;
-    transition: .5s cubic-bezier(0.39, 0.575, 0.565, 1);
-    color: #191919;
-    z-index: -1;
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background-color: #fff; 
+    width: 100%; /* Expands to full width on hover */
+    height: 100%; 
+    transition: .5s cubic-bezier(0.39, 0.575, 0.565, 1); 
+    z-index: -1; 
 }
 
 .btn:hover{
-    color: #191919;
-    z-index: 1;
+    color: #191919; /* Changes text color on hover */
+    z-index: 1; /* Ensures the text appears on top of the pseudo-element */
 }
+
 .btn:not(:hover){
-    color: #fff;
-    /* transition-delay: .4s; */
+    color: #fff; 
+    /* transition-delay: .4s; */ /* Optional: Delays the color transition */
     z-index: 1;
 }
