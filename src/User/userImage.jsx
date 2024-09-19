@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import defaultUserIcon from "../assets/profile-user.png";
 
 const UserImageProfile = () => {
-  const { currentUser } = useAuth(); // Get the current authenticated user
+  const { currentUser } = useAuth(); // Get the current authenticated user 
   const userRef = doc(db, "userdb", currentUser.uid); // Reference to the user's document in Firestore
   const fileInputRef = useRef(null); // Ref for the file input element to allow programmatically triggering it
   const [newProfilePicture, setNewProfilePicture] = useState(null); // State for storing the new profile picture file
