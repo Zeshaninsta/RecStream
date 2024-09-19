@@ -8,30 +8,30 @@ import { useNavigate } from "react-router-dom";
 import defaultUserIcon from "../assets/profile-user.png";
 
 const UserImageProfile = () => {
-  const { currentUser } = useAuth();
-  const userRef = doc(db, "userdb", currentUser.uid);
-  const fileInputRef = useRef(null); // Ref for file input element
-  const [newProfilePicture, setNewProfilePicture] = useState(null);
-  const [newBios, setNewBios] = useState("");
-  const [oldBios, setOldBios] = useState("");
-  const [userData, setUserData] = useState(null); // State to store user data
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [editingBios, setEditingBios] = useState(false);
-  const navigate = useNavigate(); // Corrected variable name to follow convention
+  const { currentUser } = useAuth(); // Get the current authenticated user
+  const userRef = doc(db, "userdb", currentUser.uid); // Reference to the user's document in Firestore
+  const fileInputRef = useRef(null); // Ref for the file input element to allow programmatically triggering it
+  const [newProfilePicture, setNewProfilePicture] = useState(null); // State for storing the new profile picture file
+  const [newBios, setNewBios] = useState(""); // State for the new bio input value
+  const [oldBios, setOldBios] = useState(""); // State for the current bio from Firestore
+  const [userData, setUserData] = useState(null); // State to store the full user data fetched from Firestore
+  const [error, setError] = useState(""); // State for error messages
+  const [successMessage, setSuccessMessage] = useState(""); // State for success messages
+  const [editingBios, setEditingBios] = useState(false); // State to track if the bio is in edit mode
+  const navigate = useNavigate(); // Hook for navigating between routes
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
-        // Check if currentUser exists
+        // Ensure the user is authenticated before attempting to fetch data
         try {
-          const userSnapshot = await getDoc(userRef);
+          const userSnapshot = await getDoc(userRef); // Fetch user data from Firestore
           if (userSnapshot.exists()) {
-            const userDataFromFirestore = userSnapshot.data();
-            setUserData(userDataFromFirestore);
-            setOldBios(userDataFromFirestore.bios || ""); // Set the bios value from database
+            const userDataFromFirestore = userSnapshot.data(); // Get the data from the snapshot
+            setUserData(userDataFromFirestore); // Store user data in state
+            setOldBios(userDataFromFirestore.bios || ""); // Set the current bio for display
           } else {
-            navigate("/login"); // Corrected function name
+            navigate("/login"); // Redirect to login if user document is not found
             setError("User document not found");
           }
         } catch (error) {
@@ -42,22 +42,20 @@ const UserImageProfile = () => {
     };
 
     fetchUserData();
-  }, [currentUser, userRef, navigate]); // Added missing dependencies
+  }, [currentUser, userRef, navigate]); // Dependencies include currentUser, userRef, and navigate
 
   const handleImageClick = () => {
-    // Trigger file input when the image is clicked
-    fileInputRef.current.click();
+    fileInputRef.current.click(); // Trigger file input click when profile picture is clicked
   };
 
   const handlePictureChange = async (e) => {
-    // Set the new profile picture when a file is selected
-    setNewProfilePicture(e.target.files[0]);
-    await handlePictureUpload(e.target.files[0]);
+    setNewProfilePicture(e.target.files[0]); // Set the new profile picture file
+    await handlePictureUpload(e.target.files[0]); // Upload the new profile picture
   };
 
   const handlePictureUpload = async (file) => {
     try {
-      await uploadProfilePicture(currentUser, file);
+      await uploadProfilePicture(currentUser, file); // Call the function to upload the picture
       setSuccessMessage("Profile picture updated successfully.");
       setTimeout(() => setSuccessMessage(""), 2000); // Clear success message after 2 seconds
     } catch (error) {
@@ -67,9 +65,9 @@ const UserImageProfile = () => {
 
   const handleSaveBios = async () => {
     try {
-      await setDoc(userRef, { bios: newBios }, { merge: true });
+      await setDoc(userRef, { bios: newBios }, { merge: true }); // Update bio in Firestore with merge option
       setSuccessMessage("Bios updated successfully.");
-      setEditingBios(false);
+      setEditingBios(false); // Exit edit mode
       setTimeout(() => setSuccessMessage(""), 2000); // Clear success message after 2 seconds
     } catch (error) {
       console.log(error);
@@ -83,7 +81,7 @@ const UserImageProfile = () => {
         <label
           htmlFor="profilePicture"
           className="cursor-pointer relative"
-          onClick={handleImageClick}
+          onClick={handleImageClick} // Trigger image click event
         >
           <img
             src={
@@ -98,9 +96,9 @@ const UserImageProfile = () => {
             type="file"
             id="profilePicture"
             accept="image/*"
-            onChange={handlePictureChange}
-            ref={fileInputRef} // Assign the ref to the file input
-            className="hidden"
+            onChange={handlePictureChange} // Handle picture file selection
+            ref={fileInputRef} // Associate the input with the file input ref
+            className="hidden" // Hidden input field for file selection
           />
           <div className="absolute bottom-0 right-0 bg-white rounded-full p-1">
             <AiOutlineCamera className="text-blue-500 w-6 h-6 cursor-pointer" />
@@ -112,10 +110,10 @@ const UserImageProfile = () => {
               <p>Bio</p>
               <div className="flex justify-center items-center gap-1">
                 <p className="text-sm italic text-gray-400">
-                  {userData ? userData.bios : ""}
+                  {userData ? userData.bios : ""} {/* Display the current bio */}
                 </p>
                 <button
-                  onClick={() => setEditingBios(true)}
+                  onClick={() => setEditingBios(true)} // Enable editing mode
                   className="ml-2 text-blue-500"
                 >
                   <AiOutlineEdit />
@@ -123,16 +121,16 @@ const UserImageProfile = () => {
               </div>
             </div>
           ) : (
-            <div className="flex justify-around items-center  m-auto gap-2">
+            <div className="flex justify-around items-center m-auto gap-2">
               <input
                 type="text"
                 className="border p-2 border-gray-300 text-black rounded mt-2 resize-none"
-                value={newBios}
-                placeholder={oldBios}
-                onChange={(e) => setNewBios(e.target.value)}
+                value={newBios} // Bind input to the new bio state
+                placeholder={oldBios} // Show current bio as placeholder
+                onChange={(e) => setNewBios(e.target.value)} // Update new bio state on input change
               />
               <button
-                onClick={handleSaveBios}
+                onClick={handleSaveBios} // Save new bio when button is clicked
                 className="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-600"
               >
                 Save
@@ -140,9 +138,9 @@ const UserImageProfile = () => {
             </div>
           )}
         </div>
-        {error && <div className="text-red-500 mt-4">{error}</div>}
+        {error && <div className="text-red-500 mt-4">{error}</div>} {/* Display error messages */}
         {successMessage && (
-          <div className="text-green-500 mt-4">{successMessage}</div>
+          <div className="text-green-500 mt-4">{successMessage}</div> {/* Display success messages */}
         )}
       </div>
     </div>
