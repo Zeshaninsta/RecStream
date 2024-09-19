@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Settings = () => {
   const { currentUser, updatePassword, deleteUser } = useAuth();
   const Navigation = useNavigate();
+  
+  // State variables to manage input fields and feedback messages
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
@@ -18,13 +20,14 @@ const Settings = () => {
   const [userData, setUserData] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  // Redirect to login page if no user is logged in
   useEffect(() => {
-    // Redirect to login page if no user is logged in
     if (!currentUser) {
       Navigation("/login");
     }
   }, [currentUser, Navigation]);
 
+  // Fetch current user data from Firestore and set it to state
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
@@ -40,7 +43,7 @@ const Settings = () => {
         } catch (error) {
           setError("Error fetching user data: " + error.message);
         } finally {
-          setLoading(false);
+          setLoading(false); // Set loading to false after data is fetched
         }
       }
     };
@@ -48,30 +51,34 @@ const Settings = () => {
     fetchUserData();
   }, [currentUser]);
 
+  // Handle saving user changes (username, email, password)
   const handleSaveChanges = async () => {
     setError("");
     setSuccessMessage("");
     try {
       const userRef = doc(db, "userdb", currentUser.uid);
+      // Update user's display name and email in Firestore
       await updateDoc(userRef, {
         displayName: newName || userData.displayName,
         email: newEmail || userData.email,
       });
+      // If new password is provided, validate and update it
       if (newPassword && confirmPassword) {
         if (newPassword !== confirmPassword) {
           throw new Error("New password and confirm password don't match");
         }
-        await updatePassword(oldPassword, newPassword);
-        setOldPassword("");
+        await updatePassword(oldPassword, newPassword); // Update Firebase Authentication password
+        setOldPassword(""); // Reset password fields after update
         setNewPassword("");
         setConfirmPassword("");
       }
       setSuccessMessage("Changes saved successfully.");
     } catch (error) {
-      setError(error.message);
+      setError(error.message); // Display error if something goes wrong
     }
   };
 
+  // Handle deleting user account
   const handleDeleteAccount = async () => {
     setError("");
     try {
@@ -82,9 +89,10 @@ const Settings = () => {
       // Delete user account from Firebase Authentication
       await deleteUser(currentUser);
 
-      Navigation("/login"); // Redirect to login page after successful account deletion
+      // Redirect to login page after successful deletion
+      Navigation("/login");
     } catch (error) {
-      setError("Failed to delete account.");
+      setError("Failed to delete account."); // Handle deletion error
     }
   };
 
@@ -97,6 +105,7 @@ const Settings = () => {
         <div className="flex flex-col gap-5 h-full w-full">
           {userData && (
             <>
+              {/* Username input field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="username" className="text-gray-700">
                   Username:
@@ -110,6 +119,7 @@ const Settings = () => {
                   className="rounded border p-2"
                 />
               </div>
+              {/* Email input field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="email" className="text-gray-700">
                   Email:
@@ -123,6 +133,7 @@ const Settings = () => {
                   className="rounded border p-2"
                 />
               </div>
+              {/* Old password input field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="oldPassword" className="text-gray-700">
                   Old Password:
@@ -136,6 +147,7 @@ const Settings = () => {
                   className="rounded border p-2"
                 />
               </div>
+              {/* New password input field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="newPassword" className="text-gray-700">
                   New Password:
@@ -149,6 +161,7 @@ const Settings = () => {
                   className="rounded border p-2"
                 />
               </div>
+              {/* Confirm password input field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="confirmPassword" className="text-gray-700">
                   Confirm Password:
@@ -162,6 +175,7 @@ const Settings = () => {
                   className="rounded border p-2"
                 />
               </div>
+              {/* Save changes button */}
               <button
                 onClick={handleSaveChanges}
                 className="bg-green-700 text-white px-4 py-2 rounded hover:bg-gray-800"
@@ -170,7 +184,9 @@ const Settings = () => {
               </button>
             </>
           )}
+          {/* Display error message if any */}
           {error && <div className="text-red-500 mt-4">{error}</div>}
+          {/* Display success message if changes are saved */}
           {successMessage && (
             <div className="text-green-500 mt-4">{successMessage}</div>
           )}
@@ -183,6 +199,7 @@ const Settings = () => {
               your data. This action cannot be undone.
             </p>
             <div className="flex justify-center items-center">
+              {/* Confirmation for account deletion */}
               {!confirmDelete ? (
                 <button
                   onClick={() => setConfirmDelete(true)}
