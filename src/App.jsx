@@ -20,7 +20,7 @@ const App = () => {
   const location = useLocation();
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-white">
       <Nav />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />

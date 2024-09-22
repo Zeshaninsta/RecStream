@@ -116,13 +116,12 @@ const SinglePosts = () => {
       setFilePreview("");
     }
   };
-  
+
   // if (!currentUser) {
   //   navigate("/login");
   // }
   const handleAnswerSubmit = async () => {
     setLoading(true); // Start loading
-
 
     try {
       if (answer.trim() !== "") {
@@ -178,7 +177,7 @@ const SinglePosts = () => {
           <IoMdArrowRoundBack className="text-gray-900" />
           Back
         </button>
-        <div className="flex justify-normal items-start mt-10 w-full lg:w-[70%] mx-auto relative z-10">
+        <div className="flex flex-col md:flex-row justify-normal items-start mt-10 w-full lg:w-[80%] mx-auto relative z-10">
           <div className="p-5 w-full text-gray-900 m-auto flex flex-col justify-start items-start min-h-screen border-r border-white z-10">
             {post ? (
               <div className="w-full flex flex-col">
@@ -228,7 +227,7 @@ const SinglePosts = () => {
                               {ans.userName}
                             </p>
                           </div>
-                          <p className="w-full p-2 text-sm rounded-md">
+                          <p className="w-full p-2 text-sm rounded-md whitespace-pre-wrap text-start">
                             {ans.answerText}
                           </p>
                           {ans.fileURL && (
@@ -243,62 +242,70 @@ const SinglePosts = () => {
                     ))}
                   </ul>
                 </div>
-                
-
-
-
 
                 {currentUser && (
-  <div className="my-8">
-    <h1 className="text-lg text-gray-900 mb-4">Submit Your Answer</h1>
-    <div className="flex items-start justify-start w-full">
-      <label className="relative inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-md cursor-pointer hover:bg-gray-700 transition duration-300 mb-10">
-        <input
-          type="file"
-          className="absolute inset-0 opacity-0 cursor-pointer"
-          onChange={handleFileChange}
-        />
-        <span className="text-sm font-medium">Choose File</span>
-      </label>
-      {filePreview && (
-        <div className="ml-4">
-          <img
-            src={filePreview}
-            alt="File Preview"
-            className="w-24 h-24 object-cover border border-gray-300 rounded-md"
-          />
-        </div>
-      )}
-    </div>
-    <textarea
-      value={answer}
-      onChange={(e) => setAnswer(e.target.value)}
-      rows="4"
-      className="w-full bg-transparent p-2 border border-gray-300 rounded-md"
-      placeholder="Write your answer here..."
-    />
-    <button
-      onClick={handleAnswerSubmit}
-      disabled={loading} // Disable button when loading
-      className={`w-full mt-4 p-2 ${loading ? 'bg-gray-500' : 'bg-gray-800'} text-white rounded-md hover:bg-gray-700 transition duration-300`}
-    >
-      {loading ? "Submitting..." : "Submit Answer"} {/* Show loading state */}
-    </button>
-  </div>
-)}
+                  <div className="my-8">
+                    <h1 className="text-lg text-gray-900 mb-4">
+                      Submit Your Answer
+                    </h1>
+                    <div className="flex items-start justify-start w-full">
+                      <label className="relative inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-md cursor-pointer hover:bg-gray-700 transition duration-300 mb-10">
+                        <input
+                          type="file"
+                          className="absolute inset-0 opacity-0 cursor-pointer"
+                          onChange={handleFileChange}
+                        />
+                        <span className="text-sm font-medium">Choose File</span>
+                      </label>
+                      {filePreview && (
+                        <div className="ml-4">
+                          <img
+                            src={filePreview}
+                            alt="File Preview"
+                            className="w-24 h-24 object-cover border border-gray-300 rounded-md"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <textarea
+                      value={answer}
+                      onChange={(e) => setAnswer(e.target.value)}
+                      rows="4"
+                      className="w-full bg-transparent p-2 border border-gray-300 rounded-md"
+                      placeholder="Write your answer here..."
+                      style={{ whiteSpace: "pre-wrap" }} // This ensures spaces and line breaks are preserved
+                    />
 
+                    <button
+                      onClick={handleAnswerSubmit}
+                      disabled={loading} // Disable button when loading
+                      className={`w-full mt-4 p-2 ${
+                        loading ? "bg-gray-500" : "bg-gray-800"
+                      } text-white rounded-md hover:bg-gray-700 transition duration-300`}
+                    >
+                      {loading ? "Submitting..." : "Submit Answer"}{" "}
+                      {/* Show loading state */}
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="text-gray-900">Loading...</div>
             )}
           </div>
-          <div className="lg:w-[30%] w-full lg:ml-10 mt-10 lg:mt-0">
+          <div className="w-[2px] h-screen bg-gray-500"></div>
+          <div className="px-5 md:px-0 lg:w-[20%] w-full lg:ml-10 mt-10 lg:mt-0 ">
             <h1 className="text-lg text-gray-900 mb-4">More Posts</h1>
-            <div className="flex flex-col items-start justify-start">
+            <div className="flex flex-col items-start justify-start cursor-pointer">
               {sidebarPosts.map((post) => (
-                <div key={post.id} className="mb-5 p-3 border border-gray-300 rounded-md">
+                <div
+                  key={post.id}
+                  className="mb-5 p-3 border border-gray-300 rounded-md"
+                >
                   <h2 className="text-sm font-bold">{post.PostsName}</h2>
-                  <p className="text-xs text-gray-700">{post.PostsDescription}</p>
+                  <p className="text-xs text-gray-700">
+                    {post.PostsDescription}
+                  </p>
                 </div>
               ))}
             </div>

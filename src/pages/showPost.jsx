@@ -85,7 +85,7 @@ const ShowPosts = () => {
   return (
       <div className="w-full m-auto h-full min-h-screen">
         <div className="w-full lg:w-[60%] m-auto flex flex-col justify-center items-center px-2">
-          <div className="w-full lg:w-[60%] mx-auto flex justify-center items-center gap-2 px-5 py-2 mt-5 text-gray-900 rounded-md">
+          <div className="w-full mx-auto flex justify-center items-center gap-2 px-5 py-2 mt-5 text-gray-900 border border-slate-500 rounded-md">
             <input
               type="search"
               placeholder="Search posts..."
@@ -95,7 +95,7 @@ const ShowPosts = () => {
             />
             <FiSearch className="cursor-pointer text-md" />
           </div>
-          <div className="flex gap-2 text-xs lg:sm mt-4 w-full lg:w-[60%] overflow-x-scroll m-auto p-2 text-gray-900 ">
+          <div className="flex justify-between gap-2 text-xs lg:sm mt-4 w-full m-auto p-2 text-gray-900  py-4 overflow-x-auto border-b border-slate-900">
             {[
               "Books",
                   "Movies",
@@ -109,7 +109,7 @@ const ShowPosts = () => {
             ].map((tag) => (
               <button
                 key={tag}
-                className={`tag-button ${
+                className={`tag-button hover:text-blue-500${
                   selectedTags.includes(tag) ? "tag-button-selected" : ""
                 } duration-500 px-5 py-2`}
                 onClick={() => toggleTag(tag)}

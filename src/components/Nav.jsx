@@ -20,7 +20,7 @@ const Nav = () => {
 
   return (
     <div
-      className={`w-full flex flex-col relative justify-center items-center z-50 px-5 py-2 transition-all duration-300 ${
+      className={`w-full flex flex-col border-b border-gray-500 relative justify-center items-center z-50 px-5 py-2 transition-all duration-300 ${
         scrollPosition > 0
           ? "sticky top-0 bg-transparent backdrop-blur-md"
           : "relative bg-transparent"

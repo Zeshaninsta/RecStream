@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
-import HowItWorks from "./HowItWorks";
-import Community from "./Community";
-import FAQ from "./FAQ";
-import Button from "../components/Button";
-import Testimonials from "./Testimonial";
-import CTA from "./CTA";
-import Developers from "./Developers";
-import Collaborate from "./Collaborate";
-import { Link } from "react-router-dom";
 import { IoIosArrowUp } from "react-icons/io";
 import "./Home.css";
 import FramerMotion from "./FramerMotion";
-import PageTransition from "./PageTransition";
 import Explore from '../components/Explore.json'
 import ShowPost from './showPost'
-import GridLines from "react-gridlines";
 const HeroSection = () => {
   const background = [
     "bg-purple-500",
@@ -79,7 +68,7 @@ const HeroSection = () => {
                             <p className='text-gray-500 font-poppins font-normal'>{cate.description}</p>
                             <h4 className="text-gray-900 cursor-pointer text-md ">{cate.link}</h4>
                         </div>
-                        <div className='group relative'>
+                        <div className='group relative w-32 h-32'>
                             <div className='absolute top-0 left-0 w-full h-full bg-gray-500 z-10 group-hover:rotate-12 ease-in-out duration-300 rounded-lg'></div>
                             <img
                                 src={cate.image}
@@ -94,13 +83,6 @@ const HeroSection = () => {
           </div>
       </FramerMotion>
       <ShowPost />
-      {/* <HowItWorks />
-      <FAQ /> */}
-      {/* <Community />
-      <Testimonials />
-      <CTA />
-      <Developers />
-      <Collaborate /> */}
     </section>
   );
 };
