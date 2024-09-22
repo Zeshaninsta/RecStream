@@ -178,7 +178,7 @@ const SinglePosts = () => {
           Back
         </button>
         <div className="flex flex-col md:flex-row justify-normal items-start mt-10 w-full lg:w-[80%] mx-auto relative z-10">
-          <div className="p-5 w-full text-gray-900 m-auto flex flex-col justify-start items-start min-h-screen border-r border-white z-10">
+          <div className="p-5 w-full text-gray-900 m-auto flex flex-col justify-start items-start md:min-h-screen border-r border-white z-10">
             {post ? (
               <div className="w-full flex flex-col">
                 <div className="flex items-center mb-2 ">
@@ -194,10 +194,12 @@ const SinglePosts = () => {
                   <p className="text-gray-900 text-sm font-rubik font-light border-b border-yellow-600">
                     {post.PostsOwner || "Unknown User"}
                   </p>
+                    </div>
+                    <div className="w-full flex justify-between items-center overflow-hidden">
                   {post.tags?.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-2 py-1 text-xs font-rubik ml-2"
+                      className="px-2 py-1 text-xs font-rubik ml-2 overflow-x-auto"
                     >
                       #{tag}
                     </span>
@@ -244,7 +246,7 @@ const SinglePosts = () => {
                 </div>
 
                 {currentUser && (
-                  <div className="my-8">
+                  <div className="md:my-8">
                     <h1 className="text-lg text-gray-900 mb-4">
                       Submit Your Answer
                     </h1>
@@ -293,8 +295,8 @@ const SinglePosts = () => {
               <div className="text-gray-900">Loading...</div>
             )}
           </div>
-          <div className="w-[2px] h-screen bg-gray-500"></div>
-          <div className="px-5 md:px-0 lg:w-[20%] w-full lg:ml-10 mt-10 lg:mt-0 ">
+          <div className="w-[2px] md:h-screen bg-gray-500"></div>
+          <div className="px-5 md:px-0 lg:w-[20%] w-full lg:ml-10 mt-10 lg:mt-0">
             <h1 className="text-lg text-gray-900 mb-4">More Posts</h1>
             <div className="flex flex-col items-start justify-start cursor-pointer">
               {sidebarPosts.map((post) => (
