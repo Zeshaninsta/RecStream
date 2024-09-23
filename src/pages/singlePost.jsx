@@ -251,6 +251,8 @@ const SinglePosts = () => {
                   </ul>
                 </div>
 
+                <div className="w-full h-[1px] bg-gray-900 my-5"></div>
+
                 {currentUser && (
                   <div className="md:my-8">
                     <h1 className="text-lg text-gray-900 mb-4">
