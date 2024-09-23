@@ -90,7 +90,7 @@ const CreatePost = () => {
   };
 
   return (
-      <div className="w-full lg:w-[60%] m-auto text-gray-900 p-5 flex flex-col">
+      <div className="w-full  m-auto text-gray-900 p-5 flex flex-col">
         <div className="w-full flex flex-col justify-center items-center p-2">
           <h2 className="text-2xl font-bold mb-4 flex justify-center items-center gap-2 text-gray-900 cursor-pointer">
             What's in Your Mind <BsFillQuestionCircleFill />

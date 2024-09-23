@@ -17,6 +17,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PageTransition from "./PageTransition";
+import { FaLink } from "react-icons/fa";
 import { toast } from "react-toastify"; // Import react-toastify
 
 const SinglePosts = () => {
@@ -24,6 +25,7 @@ const SinglePosts = () => {
   const [post, setPost] = useState(null);
   const [sidebarPosts, setSidebarPosts] = useState([]);
   const [answer, setAnswer] = useState("");
+  const [PostsLink1, setPostsLink1] = useState('')
   const [answers, setAnswers] = useState([]);
   const [currentUserData, setCurrentUserData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null); // State for file
@@ -140,6 +142,7 @@ const SinglePosts = () => {
           userName: currentUserData?.Name || "Unknown User",
           userProfile: currentUserData?.profileImage || "",
           fileURL, // Add the file URL to the answer
+          PostsLink1: PostsLink1
         };
 
         const postSnap = await getDoc(postRef);
@@ -156,7 +159,9 @@ const SinglePosts = () => {
           setAnswer("");
           setSelectedFile(null); // Clear file input
           setFilePreview(""); // Clear file preview
+          setPostsLink1('');
           toast.success("Answer submitted successfully!"); // Show success notification
+
         }
       }
     } catch (error) {
@@ -240,6 +245,7 @@ const SinglePosts = () => {
                             {ans.answerText}
                           </p>
                         </div>
+                        {ans.PostsLink1 && <a href={ans.PostsLink1} target="_blank">Link : <span className="text-blue-500 hover:text-blue-600 duration-500">{ans.PostsLink1}</span></a> }
                       </li>
                     ))}
                   </ul>
@@ -275,9 +281,24 @@ const SinglePosts = () => {
                       rows="4"
                       className="w-full bg-transparent p-2 border border-gray-300 rounded-md"
                       placeholder="Write your answer here..."
-                      style={{ whiteSpace: "pre-wrap" }} // This ensures spaces and line breaks are preserved
+                      style={{ whiteSpace: "pre-wrap" }}
                     />
 
+<div className="w-full flex flex-col gap-2 mt-2">
+              <label className="flex justify-start items-center gap-1 text-gray-900 mb-1 bg-transparent text-sm font-rubik">
+              <FaLink />
+                Link: {"("}optional{")"}
+              </label>
+              <input
+  type="url"
+  value={PostsLink1}
+  onChange={(e) => setPostsLink1(e.target.value)}
+  className="w-full outline-none border border-slate-700 focus:border-blue-400 text-sm text-gray-900 bg-transparent p-2 resize-none overflow-auto"
+  placeholder="Enter a valid URL"
+  pattern="https?://.+"
+/>
+
+            </div>
                     <button
                       onClick={handleAnswerSubmit}
                       disabled={loading} // Disable button when loading
@@ -308,6 +329,7 @@ const SinglePosts = () => {
                   <p className="text-xs text-gray-700">
                     {post.PostsDescription}
                   </p>
+              
                 </div>
               ))}
             </div>
