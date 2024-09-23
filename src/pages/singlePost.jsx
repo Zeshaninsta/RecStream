@@ -168,7 +168,6 @@ const SinglePosts = () => {
   };
 
   return (
-    <PageTransition>
       <div className="w-full min-h-screen z-10">
         <button
           onClick={handleBack}
@@ -195,7 +194,7 @@ const SinglePosts = () => {
                     {post.PostsOwner || "Unknown User"}
                   </p>
                     </div>
-                    <div className="w-full flex justify-between items-center overflow-hidden">
+                    <div className="w-full flex justify-start gap-2 items-center overflow-hidden">
                   {post.tags?.map((tag, index) => (
                     <span
                       key={index}
@@ -206,14 +205,15 @@ const SinglePosts = () => {
                   ))}
                 </div>
                 <div
-                  className="mb-2 text-lg font-rubik font-bold p-2 text-start w-full"
+                  className="mb-2 text-lg font-rubik font-bold text-start w-full"
                   dangerouslySetInnerHTML={{ __html: post.PostsName }}
                 />
-                <div className="w-full h-[2px] bg-gradient-to-t from-transparent via-slate-700 to-transparent"></div>
+                <div className="w-full h-[2px] bg-gradient-to-t from-transparent via-slate-700 to-transparent mb-2"></div>
                 <div
-                  className="ql-editor text-gray-900 p-5 whitespace-pre-wrap"
+                  className="ql-editor text-gray-900 whitespace-pre-wrap text-start"
                   dangerouslySetInnerHTML={{ __html: post.PostsDescription }}
                 />
+                {post.PostsLink1 && <a href={post.PostsLink1} target="_blank">Link : <span className="text-blue-500 hover:text-blue-600 duration-500">{post.PostsLink1}</span></a> }
                 <div className="mt-8">
                   <h1 className="text-lg text-gray-900 mb-4">Answers</h1>
                   <ul>
@@ -229,16 +229,16 @@ const SinglePosts = () => {
                               {ans.userName}
                             </p>
                           </div>
-                          <p className="w-full p-2 text-sm rounded-md whitespace-pre-wrap text-start">
-                            {ans.answerText}
-                          </p>
                           {ans.fileURL && (
                             <img
                               src={ans.fileURL}
                               alt="Uploaded File"
-                              className="w-24 h-24 object-cover border border-gray-300 rounded-md"
+                              className="w-full object-cover border border-gray-300 rounded-md"
                             />
                           )}
+                          <p className="w-full p-2 text-sm rounded-md whitespace-pre-wrap text-start">
+                            {ans.answerText}
+                          </p>
                         </div>
                       </li>
                     ))}
@@ -314,7 +314,6 @@ const SinglePosts = () => {
           </div>
         </div>
       </div>
-    </PageTransition>
   );
 };
 

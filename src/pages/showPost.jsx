@@ -97,6 +97,8 @@ const ShowPosts = () => {
           </div>
           <div className="flex justify-between gap-2 text-xs lg:sm mt-4 w-full m-auto p-2 text-gray-900  py-4 overflow-x-auto border-b border-slate-900">
             {[
+              "Youtube",
+                  "Tedx",
               "Books",
                   "Movies",
                   "Sport",

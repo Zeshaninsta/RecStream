@@ -14,6 +14,7 @@ import { RiQuestionAnswerLine } from "react-icons/ri";
 import { PiChatCenteredTextFill } from "react-icons/pi";
 import { BsQuestionDiamondFill } from "react-icons/bs";
 import { AiFillTags } from "react-icons/ai";
+import { FaLink } from "react-icons/fa";
 import PageTransition from "./PageTransition";
 
 const CreatePost = () => {
@@ -109,8 +110,24 @@ const CreatePost = () => {
                 type="text"
                 value={PostsName}
                 onChange={(e) => setPostsName(e.target.value)}
+                placeholder="Enhancing User Experience with AI"
                 className="w-full border border-slate-700 rounded px-3 py-2 bg-transparent text-gray-900 outline-none focus:border-blue-600"
               />
+            </div>
+            <div className="w-full flex flex-col gap-2">
+              <label className="flex justify-start items-center gap-1 text-gray-900 mb-1 bg-transparent text-sm font-rubik">
+              <FaLink />
+                Link: {"("}optional{")"}
+              </label>
+              <input
+  type="url"
+  value={PostsLink1}
+  onChange={(e) => setPostsLink1(e.target.value)}
+  className="w-full outline-none border border-slate-700 focus:border-blue-400 text-sm text-gray-900 bg-transparent p-2 resize-none overflow-auto"
+  placeholder="Enter a valid URL"
+  pattern="https?://.+"
+/>
+
             </div>
             <div className="w-full flex flex-col gap-2">
               <label className="flex justify-start items-center gap-1 text-gray-900 mb-1 bg-transparent text-sm font-rubik">
@@ -123,6 +140,7 @@ const CreatePost = () => {
                 className="w-full outline-none border border-slate-700 focus:border-blue-400 text-sm text-gray-900 bg-transparent p-2 h-[200px] resize-none overflow-auto"
               />
             </div>
+           
             <div className="w-full flex flex-col gap-2">
               <label className="flex justify-between items-center gap-1 text-gray-900 mb-1 bg-transparent text-sm font-rubik">
                 {" "}
@@ -145,6 +163,8 @@ const CreatePost = () => {
               />
               <div className="flex text-xs lg:text-sm cursor-pointer flex-wrap gap-2 mt-2">
                 {[
+                  "Youtube",
+                  "Tedx",
                   "Books",
                   "Movies",
                   "Sport",
