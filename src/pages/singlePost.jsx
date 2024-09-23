@@ -211,7 +211,7 @@ const SinglePosts = () => {
                 />
                 <div className="w-full h-[2px] bg-gradient-to-t from-transparent via-slate-700 to-transparent"></div>
                 <div
-                  className="ql-editor text-gray-900 p-5 overflow-scroll"
+                  className="ql-editor text-gray-900 p-5 whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{ __html: post.PostsDescription }}
                 />
                 <div className="mt-8">

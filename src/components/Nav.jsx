@@ -29,7 +29,7 @@ const Nav = () => {
       <div className="flex justify-between items-center gap-2 w-full">
         <nav className="w-full m-auto lg:w-[80%] px-2 py-4 flex justify-between items-center z-20">
           <Link to="/">
-            <h1 className="font-rubik font-bold text-xs lg:text-sm text-gray-900 p-2 rounded-md cursor-pointer hover:bg-white hover:text-[#06131a] duration-500">
+            <h1 className="font-rubik font-bold text-lg  text-gray-900 p-2 rounded-md cursor-pointer hover:bg-white hover:text-[#06131a] duration-500">
               RecStream 
             </h1>
           </Link>

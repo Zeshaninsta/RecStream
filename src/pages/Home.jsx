@@ -33,7 +33,7 @@ const HeroSection = () => {
   }, []);
   return (
     <section
-      className=" text-gray-900 min-h-screen w-full z-20 relative"
+      className=" text-gray-900 min-h-screen w-full z-20 relative my-12"
       id="Home"
     >
       {isScrolled && (
